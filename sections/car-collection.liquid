@@ -1,0 +1,102 @@
+<div class="cars">
+    {% assign products = section.settings.collection.products %}
+    
+    {% for product in products %}
+        {% comment %} metafields {% endcomment %}
+        {% assign fuel = product.metafields.custom.fuel.value %}
+        {% assign rating = product.metafields.custom.rating.value.label %}
+        {% assign transmission = product.metafields.custom.transmission.value.lable %}
+        {% assign categories = product.metafields.custom.categories.value %}
+
+
+        <div class="cars-card">
+            <img class="card-img" src="{{product.featured_image | image_url: height: 310 }}" alt="{{product.title}}">
+
+            <div class="card-info">
+                
+                <div class="info-text-box">
+                    <h3 class="info-title">{{product.title}}</h3>
+
+                    <p class="info-price">{{product.price |  money}}</p>
+
+                    <button type="button" class="info-favorite-btn">
+                    {% render 'icon-heart' %}
+                    </button>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-rating-box">
+                        {% render 'icon-star' %}
+                        <p class="info-rating">{{rating}}</p>
+                    </div>
+
+                <p class="info-desc">{{product.description}}</p>
+
+                <div class="info-categories-box">
+                    {% for categore in categories %}
+                        {% assign gid = catigoge.icon %}
+
+                        <div class="info-categore-box">
+
+                        {% if categore.icon != blank %}
+                            <img src="{{categore.icon | image_url: width: 20  }}">
+                        {% endif %}
+
+                            <p class="info-categore">
+                                {% if categore.count != blank %}
+                                    {{categore.count}}
+                                {% endif %}
+    
+                               {{categore.lable}}
+                            </p>
+
+                        </div>
+                        
+
+                    {% endfor %}
+                </div>
+
+                <button type="button" class="info-more-btn">Show more</button>
+
+            </div>
+        
+        </div>
+        
+        <script>console.log({{  categories | json }})</script>
+    {% endfor %}
+</div>
+
+{% schema %}
+{
+"name": "Cars collection",
+"tag": "section",
+"class": "section",
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Title"
+},
+{
+"type": "text",
+"id": "description",
+"label": "Description"
+},
+{
+"type": "number",
+"id": "price",
+"label": "Price"
+},
+{
+"type": "collection",
+"id": "collection",
+"label": "Collection"
+}
+],
+"presets": [
+{
+"name": "Cars collection"
+}
+]
+}
+{% endschema %}
