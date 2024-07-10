@@ -1,5 +1,7 @@
+{{'car-collection.css' | asset_url | stylesheet_tag}}
+{% assign products = section.settings.collection.products %}
+
 <div class="cars">
-    {% assign products = section.settings.collection.products %}
     
     {% for product in products %}
         {% comment %} metafields {% endcomment %}
@@ -14,47 +16,53 @@
 
             <div class="card-info">
                 
-                <div class="info-text-box">
-                    <h3 class="info-title">{{product.title}}</h3>
-
-                    <p class="info-price">{{product.price |  money}}</p>
-
-                    <button type="button" class="info-favorite-btn">
-                    {% render 'icon-heart' %}
-                    </button>
-                </div>
-
                 <div class="info-box">
+
+                    <div class="info-text-box">
+
+                        <h3 class="info-title">{{product.title}}</h3>
+
+                        <div class="info-text-box-box">
+                            <p class="info-price">{{product.price |  money}}</p>
+    
+                            <button class="info-favorite-btn" type="button">
+                            {% render 'icon-heart' %}
+                            </button>
+                        </div>
+
+                    </div>
+
                     <div class="info-rating-box">
                         {% render 'icon-star' %}
                         <p class="info-rating">{{rating}}</p>
                     </div>
 
+                </div>
+
                 <p class="info-desc">{{product.description}}</p>
 
-                <div class="info-categories-box">
-                    {% for categore in categories %}
-                        {% assign gid = catigoge.icon %}
+                <ul class="info-categories-box">
+                    {% for category in categories %}
 
-                        <div class="info-categore-box">
+                        <li class="info-category-box">
 
-                        {% if categore.icon != blank %}
-                            <img src="{{categore.icon | image_url: width: 20  }}">
-                        {% endif %}
+                            {% if category.icon != blank %}
+                                <img src="{{category.icon | image_url: width: 20  }}">
+                            {% endif %}
 
-                            <p class="info-categore">
-                                {% if categore.count != blank %}
-                                    {{categore.count}}
+                            <p class="info-category">
+                                 {% if category.count != blank %}
+                                    {{category.count}}
                                 {% endif %}
-    
-                               {{categore.lable}}
+        
+                                {{category.lable}}
                             </p>
 
-                        </div>
+                        </li>
                         
 
                     {% endfor %}
-                </div>
+                </ul>
 
                 <button type="button" class="info-more-btn">Show more</button>
 
@@ -62,7 +70,7 @@
         
         </div>
         
-        <script>console.log({{  categories | json }})</script>
+        <script>console.log({{  product.address | json }})</script>
     {% endfor %}
 </div>
 
