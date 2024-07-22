@@ -146,6 +146,10 @@
 /* show more btn */
 
 .info-more-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     width: 166px;
     height: 56px;
 
@@ -157,6 +161,8 @@
     letter-spacing: -0.005em;
 
     transition: background-color 250ms ease-in;
+
+    text-decoration: none;
 
     border: none;
     border-radius: 200px;

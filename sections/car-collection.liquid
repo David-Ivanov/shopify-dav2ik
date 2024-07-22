@@ -64,7 +64,8 @@
                     {% endfor %}
                 </ul>
 
-                <button type="button" class="info-more-btn">Show more</button>
+                <a href="{{product.url}}" class="info-more-btn">Show more</a>
+                <p>{{"products.product.choose_product_options"| t: product_name: product.title}}</p>
 
             </div>
         
@@ -83,7 +84,7 @@
 {
 "type": "text",
 "id": "title",
-"label": "Title"
+"label": "t:settings_schema.global.settings.header__border.content"
 },
 {
 "type": "text",
